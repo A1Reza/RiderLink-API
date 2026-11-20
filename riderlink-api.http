@@ -1,0 +1,113 @@
+### Variables
+@baseUrl = http://localhost:8090
+@riderUsername = rider1
+@driverUsername = driver1
+
+### 1. Health Check (Public)
+GET {{baseUrl}}/health
+
+###
+
+### 2. Register Rider (Public)
+POST {{baseUrl}}/auth/signup/rider
+Content-Type: application/json
+
+{
+  "username": "{{riderUsername}}",
+  "password": "Secure123!",
+  "fullName": "Sara Ahmadi",
+  "phone": "09121234567",
+  "homeAddress": "Tehran, Valiasr St."
+}
+
+###
+
+### 3. Register Driver (Public)
+POST {{baseUrl}}/auth/signup/driver
+Content-Type: application/json
+
+{
+  "username": "{{driverUsername}}",
+  "password": "Secure123!",
+  "fullName": "Reza Karimi",
+  "phone": "09127654321",
+  "vehicleLicenseNumber": "ABC-1234"
+}
+
+###
+
+### 4. Duplicate Rider Registration (Expected: 409)
+POST {{baseUrl}}/auth/signup/rider
+Content-Type: application/json
+
+{
+  "username": "{{riderUsername}}",
+  "password": "Secure123!",
+  "fullName": "Another Rider",
+  "phone": "09121111111",
+  "homeAddress": "Tehran"
+}
+
+###
+
+### 5. Invalid Rider Registration (Expected: 400)
+POST {{baseUrl}}/auth/signup/rider
+Content-Type: application/json
+
+{
+  "username": "abc",
+  "password": "123",
+  "fullName": "",
+  "phone": "123",
+  "homeAddress": ""
+}
+
+###
+
+### 6. Invalid Driver Registration (Expected: 400)
+POST {{baseUrl}}/auth/signup/driver
+Content-Type: application/json
+
+{
+  "username": "driver2",
+  "password": "Secure123!",
+  "fullName": "Test Driver",
+  "phone": "09121234567",
+  "vehicleLicenseNumber": ""
+}
+
+###
+
+### 7. Login as Rider
+POST {{baseUrl}}/login
+Content-Type: application/x-www-form-urlencoded
+
+username={{riderUsername}}&password=Secure123!
+
+###
+
+### 8. Get Current Authenticated User
+GET {{baseUrl}}/auth/me
+
+###
+
+### 9. Get All Users (Protected)
+GET {{baseUrl}}/users
+
+###
+
+### 10. Login as Driver
+POST {{baseUrl}}/login
+Content-Type: application/x-www-form-urlencoded
+
+username={{driverUsername}}&password=Secure123!
+
+###
+
+### 11. Get Current Authenticated Driver
+GET {{baseUrl}}/auth/me
+
+###
+
+### 12. Get All Users Again
+GET {{baseUrl}}/users
