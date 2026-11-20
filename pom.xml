@@ -76,6 +76,13 @@
         </dependency>
     </dependencies>
 
+    <!--Swagger UI-->
+    <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+
     <build>
         <plugins>
             <plugin>

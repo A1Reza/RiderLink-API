@@ -34,7 +34,9 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/auth/signup/rider",
                                 "/auth/signup/driver",
-                                "/health"
+                                "/health",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
